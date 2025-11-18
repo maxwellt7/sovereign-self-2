@@ -26,18 +26,23 @@ Your apps are deployed! Complete these steps to connect everything.
 
 ### ✅ Step 2: Run Database Migration on Railway
 
-In Railway dashboard:
-1. Go to your project
-2. Click on your service
-3. Go to **"Settings"** tab
-4. Scroll to **"Deploy"** section
-5. Add **Custom Start Command**:
-   ```
-   npx prisma db push && node dist/server.js
-   ```
-6. Click **"Redeploy"**
+**Option A: Using Railway Shell (Recommended)**
+```bash
+cd "/Users/maxmayes/Documents/Sovereign Self 2.0/sovereign-self"
+railway shell
+cd apps/api
+npx prisma db push
+exit
+```
 
-This will create all database tables in production.
+**Option B: Via Railway Dashboard**
+1. Go to your Railway project
+2. Click your service → **"Settings"**
+3. Find **"Service"** section
+4. Click **"Connect"** or use the shell from dashboard
+5. Run: `cd apps/api && npx prisma db push`
+
+This creates all database tables in your production database.
 
 ---
 

@@ -39,12 +39,17 @@ https://sovereign-self.vercel.app
 ```bash
 cd "/Users/maxmayes/Documents/Sovereign Self 2.0/sovereign-self"
 
-# Push database schema to production
-railway run npx prisma db push
+# Option A: Using Railway shell (easiest)
+railway shell
+cd apps/api
+npx prisma db push
+exit
 
-# (Optional) Seed with sample data
-railway run pnpm --filter api db:seed
+# Option B: Direct command
+railway run "cd apps/api && npx prisma db push"
 ```
+
+**Note**: You may see a warning about migrations - that's okay for initial setup.
 
 ---
 

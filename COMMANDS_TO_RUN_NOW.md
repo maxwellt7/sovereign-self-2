@@ -28,7 +28,15 @@ railway domain
 ## 3. Run Database Migration on Railway
 
 ```bash
-railway run npx prisma db push
+railway run --service your-service-name "cd apps/api && npx prisma db push"
+```
+
+Or use this simpler command:
+```bash
+railway shell
+cd apps/api
+npx prisma db push
+exit
 ```
 
 This creates all tables in your production database.
