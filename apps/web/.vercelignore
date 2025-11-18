@@ -1,0 +1,8 @@
+node_modules
+.git
+*.md
+.env.example
+.vscode
+.idea
+__tests__
+

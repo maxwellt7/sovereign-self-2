@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+model User {
+  id                   String   @id @default(uuid()) @db.Uuid
+  clerkUserId          String   @unique @map("clerk_user_id")
+  email                String   @unique
+  fullName             String?  @map("full_name")
+  role                 UserRole @default(USER)
+  onboardingCompleted  Boolean  @default(false) @map("onboarding_completed")
+  preferences          Json     @default("{}")
+  createdAt            DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt            DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  journalEntries    JournalEntry[]
+  knowledgeBaseItems KnowledgeBaseItem[]
+  reflections       Reflection[]
+  growthMetrics     GrowthMetric[]
+  userGoals         UserGoal[]
+
+  @@map("users")
+}
+
+model JournalEntry {
+  id              String   @id @default(uuid()) @db.Uuid
+  userId          String   @map("user_id") @db.Uuid
+  title           String?
+  content         Json
+  mood            String?
+  tags            String[] @default([])
+  embeddingSynced Boolean  @default(false) @map("embedding_synced")
+  isArchived      Boolean  @default(false) @map("is_archived")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reflections Reflection[]
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([userId, isArchived])
+  @@index([tags])
+  @@map("journal_entries")
+}
+
+enum KnowledgeItemType {
+  NOTE
+  ARTICLE
+  RESOURCE
+  INSIGHT
+}
+
+model KnowledgeBaseItem {
+  id              String             @id @default(uuid()) @db.Uuid
+  userId          String             @map("user_id") @db.Uuid
+  type            KnowledgeItemType
+  title           String
+  content         Json
+  sourceUrl       String?            @map("source_url")
+  tags            String[]           @default([])
+  embeddingSynced Boolean            @default(false) @map("embedding_synced")
+  parentId        String?            @map("parent_id") @db.Uuid
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz
+
+  user     User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent   KnowledgeBaseItem?   @relation("KnowledgeHierarchy", fields: [parentId], references: [id], onDelete: SetNull)
+  children KnowledgeBaseItem[]  @relation("KnowledgeHierarchy")
+
+  @@index([userId, type])
+  @@index([userId, parentId])
+  @@index([tags])
+  @@map("knowledge_base_items")
+}
+
+model Reflection {
+  id             String   @id @default(uuid()) @db.Uuid
+  userId         String   @map("user_id") @db.Uuid
+  journalEntryId String?  @map("journal_entry_id") @db.Uuid
+  prompt         String
+  response       String   @db.Text
+  aiGenerated    Boolean  @default(false) @map("ai_generated")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  journalEntry JournalEntry? @relation(fields: [journalEntryId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@map("reflections")
+}
+
+enum MetricType {
+  MOOD_TREND
+  CONSISTENCY
+  WORD_COUNT
+  CUSTOM
+}
+
+model GrowthMetric {
+  id         String     @id @default(uuid()) @db.Uuid
+  userId     String     @map("user_id") @db.Uuid
+  metricType MetricType @map("metric_type")
+  value      Float
+  metadata   Json       @default("{}")
+  recordedAt DateTime   @map("recorded_at") @db.Timestamptz
+  createdAt  DateTime   @default(now()) @map("created_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, metricType, recordedAt(sort: Desc)])
+  @@map("growth_metrics")
+}
+
+enum GoalStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+}
+
+model UserGoal {
+  id          String      @id @default(uuid()) @db.Uuid
+  userId      String      @map("user_id") @db.Uuid
+  title       String
+  description String      @db.Text
+  status      GoalStatus  @default(ACTIVE)
+  progress    Float       @default(0)
+  targetDate  DateTime?   @map("target_date") @db.Date
+  createdAt   DateTime    @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime    @updatedAt @map("updated_at") @db.Timestamptz
+  completedAt DateTime?   @map("completed_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@map("user_goals")
+}
+

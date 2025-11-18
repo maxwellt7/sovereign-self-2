@@ -1,0 +1,3 @@
+web: cd apps/api && node dist/server.js
+release: cd apps/api && pnpm db:migrate:deploy
+

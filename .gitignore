@@ -1,0 +1,57 @@
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+*.lcov
+
+# Production
+dist
+build
+.next
+out
+
+# Environment - NEVER COMMIT THESE
+.env
+.env.*
+!.env.example
+*.env.configured
+.env.railway
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDEs
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Cache
+.turbo
+.cache
+.parcel-cache
+.eslintcache
+
+# Deployment
+.vercel
+.railway
+
+# Misc
+*.pem
+.husky/_
+
+# Sensitive documentation (keep locally, don't push)
+YOUR_API_KEYS.md
