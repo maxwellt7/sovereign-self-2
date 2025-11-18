@@ -1,4 +1,4 @@
-# 🎯 Easiest Way: Use Railway Dashboard
+railway shell# 🎯 Easiest Way: Use Railway Dashboard
 
 The CLI commands are having issues. Use the web interface instead - it's much easier!
 

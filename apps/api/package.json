@@ -21,7 +21,6 @@
     "@clerk/clerk-sdk-node": "^5.0.0",
     "@prisma/client": "^5.8.0",
     "@sentry/node": "^7.99.0",
-    "@sentry/profiling-node": "^7.99.0",
     "@sovereign-self/shared": "workspace:*",
     "apollo-server-express": "^3.13.0",
     "bullmq": "^5.1.0",
