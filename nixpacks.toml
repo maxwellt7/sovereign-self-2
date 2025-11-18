@@ -6,9 +6,8 @@ cmds = ["pnpm install --frozen-lockfile"]
 
 [phases.build]
 cmds = [
-  "pnpm --filter @sovereign-self/shared build",
-  "pnpm --filter api db:generate",
-  "pnpm --filter api build"
+  "cd packages/shared && pnpm build",
+  "cd apps/api && pnpm db:generate"
 ]
 
 [start]
