@@ -8,7 +8,7 @@ import { PlusCircle, Search, Filter, Loader2 } from 'lucide-react';
 
 export default function JournalPage() {
   const [search, setSearch] = useState('');
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  const [filters] = useState<Record<string, any>>({});
 
   const { data, isLoading } = useJournalEntries({
     ...filters,
@@ -62,7 +62,7 @@ export default function JournalPage() {
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
-          {data?.data.map((entry) => (
+          {data?.data.map((entry: any) => (
             <JournalEntryCard key={entry.id} entry={entry} />
           ))}
         </div>

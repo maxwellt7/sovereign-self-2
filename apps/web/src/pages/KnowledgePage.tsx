@@ -14,10 +14,9 @@ import {
   useKnowledgeTags,
 } from '@/hooks/use-knowledge';
 import { PlusCircle, Save, Loader2, Sparkles } from 'lucide-react';
-import { KnowledgeItemType } from '@sovereign-self/shared';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const ITEM_TYPES: Array<{ value: KnowledgeItemType; label: string }> = [
+const ITEM_TYPES: Array<{ value: string; label: string }> = [
   { value: 'NOTE', label: 'Note' },
   { value: 'ARTICLE', label: 'Article' },
   { value: 'RESOURCE', label: 'Resource' },
@@ -36,7 +35,7 @@ export default function KnowledgePage() {
   const updateMutation = useUpdateKnowledgeItem(selectedId || '');
 
   const [title, setTitle] = useState('');
-  const [type, setType] = useState<KnowledgeItemType>('NOTE');
+  const [type, setType] = useState<string>('NOTE');
   const [content, setContent] = useState<any>({ type: 'doc', content: [] });
   const [sourceUrl, setSourceUrl] = useState('');
   const [tags, setTags] = useState<string[]>([]);
@@ -116,13 +115,13 @@ export default function KnowledgePage() {
                   <div className="flex justify-center py-8">
                     <Loader2 className="h-6 w-6 animate-spin text-gold" />
                   </div>
-                ) : hierarchy?.items?.length === 0 ? (
+                ) : (hierarchy as any)?.items?.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
                     <p className="text-sm">No items yet</p>
                   </div>
                 ) : (
                   <KnowledgeTree
-                    items={hierarchy?.items || []}
+                    items={(hierarchy as any)?.items || []}
                     selectedId={selectedId}
                     onSelect={(item) => setSelectedId(item.id)}
                   />
@@ -172,7 +171,7 @@ export default function KnowledgePage() {
                   </div>
 
                   {/* Source URL (optional) */}
-                  {type === 'ARTICLE' || type === 'RESOURCE' ? (
+                  {(type === 'ARTICLE' || type === 'RESOURCE') ? (
                     <Input
                       value={sourceUrl}
                       onChange={(e) => setSourceUrl(e.target.value)}

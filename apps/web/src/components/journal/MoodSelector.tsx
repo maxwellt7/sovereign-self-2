@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Smile, Frown, Meh, Heart, Zap, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

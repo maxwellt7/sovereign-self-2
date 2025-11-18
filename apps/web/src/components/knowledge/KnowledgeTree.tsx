@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight, ChevronDown, FileText, Link as LinkIcon, Lightbulb, BookOpen } from 'lucide-react';
-import { KnowledgeBaseItem, KnowledgeItemType } from '@sovereign-self/shared';
+import { KnowledgeBaseItem } from '@sovereign-self/shared';
 import { cn } from '@/lib/utils';
 
 interface KnowledgeTreeProps {
@@ -42,7 +42,7 @@ interface TreeNodeProps {
 function TreeNode({ item, selectedId, onSelect, level }: TreeNodeProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const hasChildren = item.children && item.children.length > 0;
-  const Icon = TYPE_ICONS[item.type as KnowledgeItemType] || FileText;
+  const Icon = (TYPE_ICONS as any)[item.type] || FileText;
   const isSelected = item.id === selectedId;
 
   return (

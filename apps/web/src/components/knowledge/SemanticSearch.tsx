@@ -41,12 +41,12 @@ export function SemanticSearch({ onSelectResult }: SemanticSearchProps) {
         </Button>
       </form>
 
-      {searchMutation.data && (
+      {searchMutation.data && (searchMutation.data as any).results && (
         <div className="space-y-2">
           <p className="text-sm text-muted-foreground">
-            Found {searchMutation.data.results.length} results
+            Found {(searchMutation.data as any).results?.length || 0} results
           </p>
-          {searchMutation.data.results.map((result: any) => (
+          {(searchMutation.data as any).results?.map((result: any) => (
             <Card
               key={result.id}
               className="cursor-pointer hover:border-gold transition-colors"

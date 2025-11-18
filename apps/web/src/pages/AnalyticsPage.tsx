@@ -48,7 +48,7 @@ export default function AnalyticsPage() {
             <BookOpen className="h-4 w-4 text-gold" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats?.totalEntries || 0}</div>
+            <div className="text-2xl font-bold">{(stats as any)?.totalEntries || 0}</div>
             <p className="text-xs text-muted-foreground">All time</p>
           </CardContent>
         </Card>
@@ -59,9 +59,9 @@ export default function AnalyticsPage() {
             <TrendingUp className="h-4 w-4 text-gold" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats?.thisWeek || 0}</div>
+            <div className="text-2xl font-bold">{(stats as any)?.thisWeek || 0}</div>
             <p className="text-xs text-muted-foreground">
-              {stats?.thisMonth || 0} this month
+              {(stats as any)?.thisMonth || 0} this month
             </p>
           </CardContent>
         </Card>
@@ -72,7 +72,7 @@ export default function AnalyticsPage() {
             <Zap className="h-4 w-4 text-gold" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats?.averageWordCount || 0}</div>
+            <div className="text-2xl font-bold">{(stats as any)?.averageWordCount || 0}</div>
             <p className="text-xs text-muted-foreground">Per entry</p>
           </CardContent>
         </Card>

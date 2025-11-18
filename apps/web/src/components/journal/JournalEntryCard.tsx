@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { JournalEntry } from '@sovereign-self/shared';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { formatDate, formatRelativeTime } from '@/lib/utils';
+import { formatRelativeTime } from '@/lib/utils';
 import { Calendar, Tag } from 'lucide-react';
 
 interface JournalEntryCardProps {
@@ -60,7 +60,7 @@ export function JournalEntryCard({ entry }: JournalEntryCardProps) {
           {entry.tags.length > 0 && (
             <div className="flex items-center gap-2 flex-wrap">
               <Tag className="h-3 w-3 text-muted-foreground" />
-              {entry.tags.slice(0, 3).map((tag) => (
+              {entry.tags.slice(0, 3).map((tag: string) => (
                 <span
                   key={tag}
                   className="text-xs px-2 py-0.5 rounded-md bg-secondary"

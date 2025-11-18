@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 describe('Button', () => {
   it('renders correctly', () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+    expect(screen.getByRole('button').textContent).toBe('Click me');
   });
 
   it('applies variant classes', () => {
@@ -16,7 +16,7 @@ describe('Button', () => {
 
   it('can be disabled', () => {
     render(<Button disabled>Disabled</Button>);
-    expect(screen.getByRole('button')).toBeDisabled();
+    expect(screen.getByRole('button').hasAttribute('disabled')).toBe(true);
   });
 });
 

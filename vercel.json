@@ -1,0 +1,13 @@
+{
+  "buildCommand": "cd apps/web && pnpm install && pnpm build",
+  "outputDirectory": "apps/web/dist",
+  "framework": "vite",
+  "installCommand": "pnpm install --filter @sovereign-self/web --filter @sovereign-self/shared",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
+

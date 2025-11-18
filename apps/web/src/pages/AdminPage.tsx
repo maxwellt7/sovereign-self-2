@@ -46,7 +46,7 @@ export default function AdminPage() {
               <Users className="h-4 w-4 text-gold" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.totalUsers || 0}</div>
+                <div className="text-2xl font-bold">{(stats as any)?.totalUsers || 0}</div>
             </CardContent>
           </Card>
 
@@ -56,7 +56,7 @@ export default function AdminPage() {
               <Activity className="h-4 w-4 text-gold" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.activeUsersThisWeek || 0}</div>
+                <div className="text-2xl font-bold">{(stats as any)?.activeUsersThisWeek || 0}</div>
             </CardContent>
           </Card>
 
@@ -66,7 +66,7 @@ export default function AdminPage() {
               <BookOpen className="h-4 w-4 text-gold" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.totalJournalEntries || 0}</div>
+                <div className="text-2xl font-bold">{(stats as any)?.totalJournalEntries || 0}</div>
             </CardContent>
           </Card>
 
@@ -76,7 +76,7 @@ export default function AdminPage() {
               <Library className="h-4 w-4 text-gold" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.totalKnowledgeItems || 0}</div>
+                <div className="text-2xl font-bold">{(stats as any)?.totalKnowledgeItems || 0}</div>
             </CardContent>
           </Card>
 
@@ -86,7 +86,7 @@ export default function AdminPage() {
               <Users className="h-4 w-4 text-gold" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats?.recentSignups || 0}</div>
+                <div className="text-2xl font-bold">{(stats as any)?.recentSignups || 0}</div>
               <p className="text-xs text-muted-foreground">Last 7 days</p>
             </CardContent>
           </Card>
@@ -130,7 +130,7 @@ export default function AdminPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y">
-                  {users?.data.map((user) => (
+                  {users?.data.map((user: any) => (
                     <tr key={user.id} className="hover:bg-muted/50">
                       <td className="px-4 py-3">
                         <div>
