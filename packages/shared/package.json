@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -b --clean && tsc -b",
+    "build": "rm -rf dist tsconfig.tsbuildinfo && tsc",
     "dev": "tsc --watch",
     "lint": "eslint . --ext .ts",
     "typecheck": "tsc --noEmit"

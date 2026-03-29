@@ -1,10 +1,10 @@
 import { UUID, Timestamps } from './common';
 
 export enum KnowledgeItemType {
-  NOTE = 'note',
-  ARTICLE = 'article',
-  RESOURCE = 'resource',
-  INSIGHT = 'insight',
+  NOTE = 'NOTE',
+  ARTICLE = 'ARTICLE',
+  RESOURCE = 'RESOURCE',
+  INSIGHT = 'INSIGHT',
 }
 
 export interface KnowledgeBaseItem extends Timestamps {
@@ -48,7 +48,7 @@ export interface UserGoal extends Timestamps {
   userId: UUID;
   title: string;
   description: string;
-  status: 'active' | 'completed' | 'paused';
+  status: 'ACTIVE' | 'COMPLETED' | 'PAUSED';
   progress: number; // 0-100
   targetDate: Date | null;
   completedAt: Date | null;
@@ -63,7 +63,7 @@ export interface CreateGoalDto {
 export interface UpdateGoalDto {
   title?: string;
   description?: string;
-  status?: 'active' | 'completed' | 'paused';
+  status?: 'ACTIVE' | 'COMPLETED' | 'PAUSED';
   progress?: number;
   targetDate?: Date;
 }
@@ -71,9 +71,8 @@ export interface UpdateGoalDto {
 export interface GrowthMetric extends Timestamps {
   id: UUID;
   userId: UUID;
-  metricType: 'mood_trend' | 'consistency' | 'word_count' | 'custom';
+  metricType: 'MOOD_TREND' | 'CONSISTENCY' | 'WORD_COUNT' | 'CUSTOM';
   value: number;
   metadata: Record<string, any>;
   recordedAt: Date;
 }
-

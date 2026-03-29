@@ -26,10 +26,12 @@ app.use(Sentry.Handlers.tracingHandler());
 
 // Security middleware
 app.use(helmet());
-app.use(cors({
-  origin: config.corsOrigin,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: config.corsOrigin,
+    credentials: true,
+  })
+);
 
 // Logging
 if (config.nodeEnv === 'development') {
@@ -46,7 +48,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api', apiLimiter);
 
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.status(200).json({
     success: true,
     data: {
@@ -100,4 +102,3 @@ process.on('SIGINT', () => {
 });
 
 export default app;
-

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const knowledgeItemTypeSchema = z.enum(['note', 'article', 'resource', 'insight']);
+export const knowledgeItemTypeSchema = z.enum(['NOTE', 'ARTICLE', 'RESOURCE', 'INSIGHT']);
 
 export const createKnowledgeItemSchema = z.object({
   type: knowledgeItemTypeSchema,
@@ -35,8 +35,7 @@ export const createGoalSchema = z.object({
 export const updateGoalSchema = z.object({
   title: z.string().min(1).optional(),
   description: z.string().optional(),
-  status: z.enum(['active', 'completed', 'paused']).optional(),
+  status: z.enum(['ACTIVE', 'COMPLETED', 'PAUSED']).optional(),
   progress: z.number().min(0).max(100).optional(),
   targetDate: z.coerce.date().optional(),
 });
-
