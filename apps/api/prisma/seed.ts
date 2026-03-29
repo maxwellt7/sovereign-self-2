@@ -31,7 +31,7 @@ async function main() {
   console.log('✅ Created test user:', testUser.email);
 
   // Create sample journal entry
-  const journalEntry = await prisma.journalEntry.create({
+  await prisma.journalEntry.create({
     data: {
       userId: testUser.id,
       title: 'My First Journal Entry',
@@ -57,7 +57,7 @@ async function main() {
   console.log('✅ Created sample journal entry');
 
   // Create sample knowledge base item
-  const knowledgeItem = await prisma.knowledgeBaseItem.create({
+  await prisma.knowledgeBaseItem.create({
     data: {
       userId: testUser.id,
       type: 'NOTE',
@@ -83,7 +83,7 @@ async function main() {
   console.log('✅ Created sample knowledge base item');
 
   // Create a sample goal
-  const goal = await prisma.userGoal.create({
+  await prisma.userGoal.create({
     data: {
       userId: testUser.id,
       title: 'Journal Daily for 30 Days',
@@ -107,4 +107,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-

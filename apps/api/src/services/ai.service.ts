@@ -26,7 +26,7 @@ export class AIService {
     const prompts = content
       .split('\n')
       .filter((line) => line.trim())
-      .map((line) => line.replace(/^[\d\-\*\.\)]+\s*/, '').trim())
+      .map((line) => line.replace(/^[\d\-*.)]+\s*/, '').trim())
       .filter((line) => line.length > 0);
 
     return prompts.slice(0, 5);
@@ -62,9 +62,7 @@ export class AIService {
     trend: 'improving' | 'declining' | 'stable';
     insights: string;
   }> {
-    const entriesText = entries
-      .map((e) => `Date: ${e.date}, Mood: ${e.mood}`)
-      .join('\n');
+    const entriesText = entries.map((e) => `Date: ${e.date}, Mood: ${e.mood}`).join('\n');
 
     const response = await openai.chat.completions.create({
       model: CHAT_MODEL,
@@ -97,7 +95,9 @@ export class AIService {
   /**
    * Generate personalized insights from knowledge base
    */
-  async generateKnowledgeInsights(items: Array<{ title: string; content: string }>): Promise<string> {
+  async generateKnowledgeInsights(
+    items: Array<{ title: string; content: string }>
+  ): Promise<string> {
     const itemsText = items
       .map((item) => `Title: ${item.title}\nContent: ${item.content}`)
       .join('\n\n---\n\n');
@@ -123,4 +123,3 @@ export class AIService {
 }
 
 export const aiService = new AIService();
-

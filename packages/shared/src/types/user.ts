@@ -1,8 +1,8 @@
 import { UUID, Timestamps } from './common';
 
 export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
 
 export interface User extends Timestamps {
@@ -38,4 +38,3 @@ export interface UpdateUserDto {
   preferences?: Partial<UserPreferences>;
   onboardingCompleted?: boolean;
 }
-

@@ -29,11 +29,10 @@ export class AdminController {
     successResponse(res, { message: 'User deleted successfully' });
   }
 
-  async getSystemStats(req: AuthRequest, res: Response): Promise<void> {
+  async getSystemStats(_req: AuthRequest, res: Response): Promise<void> {
     const stats = await adminService.getSystemStats();
     successResponse(res, stats);
   }
 }
 
 export const adminController = new AdminController();
-

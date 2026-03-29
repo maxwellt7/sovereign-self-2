@@ -1,5 +1,5 @@
 import { openai, EMBEDDING_MODEL } from '../config/openai.js';
-import { getPineconeClient, PINECONE_INDEXES, EMBEDDING_DIMENSION } from '../config/pinecone.js';
+import { getPineconeClient, PINECONE_INDEXES } from '../config/pinecone.js';
 
 export interface EmbeddingMetadata {
   userId: string;
@@ -18,7 +18,7 @@ export class EmbeddingService {
    */
   async generateEmbedding(text: string): Promise<number[]> {
     const dimensions = parseInt(process.env.EMBEDDING_DIMENSION || '1024', 10);
-    
+
     const response = await openai.embeddings.create({
       model: EMBEDDING_MODEL,
       input: text,
@@ -188,4 +188,3 @@ export class EmbeddingService {
 }
 
 export const embeddingService = new EmbeddingService();
-
